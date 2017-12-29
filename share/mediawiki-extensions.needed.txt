@@ -1,0 +1,6 @@
+# name             # release      # commit ID                               # git repo URL
+#                  #              #                                         #
+LinkedWiki         release-3.0.0  80bfbefb02f00441e8f63e6ac03a24febf71ffa8  https://gerrit.wikimedia.org/r/p/mediawiki/extensions/LinkedWiki.git
+PageForms          release-4.1.0  7f1cec5d7bcbc8ddce8e012deb71979acbb6aa02  https://gerrit.wikimedia.org/r/p/mediawiki/extensions/PageForms.git
+SemanticMediaWiki  release-2.5.0  dbbf3d1e465f95c912da2ef421db729ad90f993e  https://github.com/SemanticMediaWiki/SemanticMediaWiki.git
+Widgets            release-1.2.1  ad556d04cc203393b2c3ddc44c39db8671442be7  https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Widgets.git

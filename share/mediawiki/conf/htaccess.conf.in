@@ -1,0 +1,41 @@
+<Directory "${module_mediawiki_installation_root_dpn}/htdocs/cache">
+Deny from all
+</Directory>
+
+<Directory "${module_mediawiki_installation_root_dpn}/htdocs/images">
+<IfModule rewrite_module>
+	RewriteEngine On
+	RewriteOptions inherit
+	RewriteCond %{QUERY_STRING} \.[^\\/:*?\x22<>|%]+(#|\?|$) [nocase]
+	RewriteRule . - [forbidden]
+	Options +FollowSymLinks
+</IfModule>
+</Directory>
+
+<Directory "${module_mediawiki_installation_root_dpn}/htdocs/includes">
+Deny from all
+</Directory>
+
+<Directory "${module_mediawiki_installation_root_dpn}/htdocs/languages">
+Deny from all
+</Directory>
+
+<Directory "${module_mediawiki_installation_root_dpn}/htdocs/maintenance">
+Deny from all
+</Directory>
+
+<Directory "${module_mediawiki_installation_root_dpn}/htdocs/maintenance/archives">
+Deny from all
+</Directory>
+
+<Directory "${module_mediawiki_installation_root_dpn}/htdocs/serialized">
+Deny from all
+</Directory>
+
+<Directory "${module_mediawiki_installation_root_dpn}/htdocs/tests">
+Deny from all
+</Directory>
+
+<Directory "${module_mediawiki_installation_root_dpn}/htdocs/tests/qunit">
+Allow from all
+</Directory>

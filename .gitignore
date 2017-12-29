@@ -1,0 +1,3 @@
+semantic-wiki.install.conf
+semantic-wiki.install.*.conf
+!semantic-wiki.install.example.conf

@@ -1,0 +1,4 @@
+Alias /wiki/ "${module_mediawiki_installation_root_dpn}/htdocs/"
+Alias /wiki  "${module_mediawiki_installation_root_dpn}/htdocs"
+
+Include "${module_mediawiki_installation_root_dpn}/conf/httpd-app.conf"
