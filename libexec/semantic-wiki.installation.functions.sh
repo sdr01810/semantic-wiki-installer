@@ -247,13 +247,11 @@ function restart_technology_stack() {
 
 		for s1 in Apache Tomcat MySQL ; do
 
-			xx net stop "tomcatstack${s1}" ||
-			report_exit_code $?
+			xxq net stop "tomcatstack${s1}" || :
 		done
 		for s1 in MySQL Tomcat Apache ; do
 
-			xx net start "tomcatstack${s1}" ||
-			report_exit_code $?
+			xxv net start "tomcatstack${s1}"
 		done
 		;;
 	*)
