@@ -1053,7 +1053,7 @@ product_site_root_url= # inferred unless set by .conf file
 
 ##
 
-password="not_secure_not_secure"
+password="not_secure"
 
 product_admin_mail_address="devops@example.com"
 

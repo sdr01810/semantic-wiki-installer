@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 ## Entry point for the Docker container.
 ##
 
@@ -27,16 +27,16 @@ xx :
 xx ls -al
 
 xx :
-xx ls -al /opt/provisioning-core
+xx ls -al /opt/semantic-wiki-installer
 
 ##
 
 case /"$-"/ in
 *i*) # interactive
-	echo
-	echo "Launching a shell..."
-	xx :
-	xx sh -l
+	xx bash -l
+	;;
+*)
+	xx /opt/semantic-wiki-installer/bin/semantic-wiki.install.sh
 	;;
 esac
 

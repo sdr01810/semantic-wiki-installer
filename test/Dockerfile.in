@@ -2,25 +2,29 @@ FROM @make:docker_base_image@
 
 STOPSIGNAL SIGTERM
 
-ENV provisioning_core_docker_image_setup_root=/var/local/workspaces/provisioning-core/setup
+ENV semantic_wiki_installer_docker_image_setup_root=/var/local/workspaces/semantic-wiki-installer/setup
 
 ##
 
 USER    root
-WORKDIR "${provisioning_core_docker_image_setup_root}"
+WORKDIR "${semantic_wiki_installer_docker_image_setup_root}"
 
-COPY ./ /opt/provisioning-core/
-RUN  mv /opt/provisioning-core/test/* .
-RUN  rm -rf /opt/provisioning-core/test
+COPY ./ /opt/semantic-wiki-installer/
+RUN  mv /opt/semantic-wiki-installer/test/* .
+RUN  rm -rf /opt/semantic-wiki-installer/test
 
-RUN ./provision.sh docker
+RUN  egrep -hv '^\s*#' conf/packages.needed.*.txt > packages.needed.filtered.txt
+
+RUN  apt-get update && apt-get install -y apt-utils bash && \
+	apt-get install -y $(cat packages.needed.filtered.txt) && \
+	rm -rf /var/lib/apt/lists/* ;
 
 ##
 
 USER    root
-WORKDIR "${provisioning_core_docker_image_setup_root}"
+WORKDIR "${semantic_wiki_installer_docker_image_setup_root}"
 
-ENTRYPOINT ["sh", "start.sh"]
+ENTRYPOINT ["bash", "start.sh"]
 
 ##
 
