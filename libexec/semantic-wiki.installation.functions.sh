@@ -864,7 +864,7 @@ function inferred_tomcat_service_setenv_script_fpn() {
 function inferred_bitnami_installation_mode() {
 
 	case "$(inferred_os_type)" in
-	msys.DISABLED|windows.DISABLED)
+	msys|windows)
 		echo "qt" # interactive GUI-based installation
 		;;
 	*)
