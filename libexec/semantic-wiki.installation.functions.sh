@@ -800,7 +800,7 @@ function inferred_cpu_type() {
 	x86_32|x86|i[0-9]86)
 		result="x86_32"
 		;;
-	x86_64|amd64)
+	x86_64|AMD64|amd64)
 		result="x86_64"
 		;;
 	unspecified)
