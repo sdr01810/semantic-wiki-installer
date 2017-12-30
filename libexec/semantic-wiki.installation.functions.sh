@@ -118,7 +118,6 @@ function install_technology_stack_tomcat_configuration() {
 
 	for f1 in "$(inferred_tomcat_service_setenv_script_fpn)" ; do
 
-		! [ -e "$f1" ] ||
 		case "$(inferred_os_type)" in
 		msys|windows)
 			perl -i~ -pe '
@@ -130,11 +129,11 @@ function install_technology_stack_tomcat_configuration() {
 				s{^\s*((?:set\s+)?JAVA_OPTS\s*=.*)(--JvmMx\s+\d+)}{${1}--JvmMx '"${tomcat_service_jvm_heap_max:?}"'};
 
 			' "$f1"
-			;;
-		esac
 
-		! [ -e "${f1%.*}.sh" ] ||
-		case "$(inferred_os_type)" in
+			xx "$(inferred_tomcat_service_controller_xpn)" //US//tomcatstackTomcat --JvmMs "${tomcat_service_jvm_heap_min:?}"
+
+			xx "$(inferred_tomcat_service_controller_xpn)" //US//tomcatstackTomcat --JvmMx "${tomcat_service_jvm_heap_max:?}"
+			;;
 		*)
 			perl -i~ -pe '
 
@@ -367,6 +366,8 @@ function install_module_fuseki_tomcat_configuration() {
 				#^-- no spaces allowed in FUSEKI_BASE
 
 			' "$f1"
+
+			xx "$(inferred_tomcat_service_controller_xpn)" //US//tomcatstackTomcat ++Environment FUSEKI_BASE=${d1}
 			;;
 		*)
 			perl -i~ -pe '
@@ -865,6 +866,29 @@ function inferred_tomcat_service_setenv_script_fpn() {
 	esac
 
 	echo "${result:?}"
+}
+
+function inferred_tomcat_service_controller_xpn() {
+
+	local result_stem="${tomcat_service_installation_root_dpn:?}/bin/tomcat"
+	local version_major="${technology_stack_version%%.*}"
+
+	local rc=0 result=
+	case "$(inferred_os_type)" in
+	msys|windows)
+		result="${result_stem:?}8"
+
+		[ -e "${result:?}" ] ||
+		result="${result_stem:?}${version_major:?}"
+		;;
+	*)
+		result=
+		rc=2
+		;;
+	esac
+
+	echo "${result:?}"
+	return ${rc}
 }
 
 function inferred_bitnami_installation_mode() {
