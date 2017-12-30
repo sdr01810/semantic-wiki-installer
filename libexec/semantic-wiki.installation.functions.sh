@@ -138,7 +138,7 @@ function install_technology_stack_tomcat_configuration() {
 
 				s{^\s*((?:export\s+)?JAVA_OPTS\s*=.*)(-Xms\d+[mM])}{${1}-Xms'"${tomcat_service_jvm_heap_min:?}"'M};
 
-				s{^\s*((?:export\s+)?JAVA_OPTS\s*=.*)(-Xmx\d+[mM])}{${1}-Xms'"${tomcat_service_jvm_heap_max:?}"'M};
+				s{^\s*((?:export\s+)?JAVA_OPTS\s*=.*)(-Xmx\d+[mM])}{${1}-Xmx'"${tomcat_service_jvm_heap_max:?}"'M};
 
 			' "${f1%.*}.sh"
 			;;
