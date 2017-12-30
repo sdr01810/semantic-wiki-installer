@@ -445,8 +445,9 @@ function install_module_mediawiki_php_configuration() {
 
 function install_module_mediawiki_local_configuration() {(
 
-	local wiki_name="${product_name_tc% Wiki} Wiki"
 	local wiki_admin_user_name="${product_name_id:?}"
+	local wiki_name="${product_name_tc% Wiki} Wiki"
+	local wiki_script_path="/wiki"
 
 	local php_path_fragment=
 	case "$(inferred_os_type)" in
@@ -474,7 +475,6 @@ function install_module_mediawiki_local_configuration() {(
 		--dbname "${product_database_name?}" \
 		--dbuser "${product_name_id:?}" \
 		--dbpass "${password:?}" \
-		--scriptpath "/wiki" \
 		--server "${product_site_root_url:?}" \
 		--pass "${password:?}" \
 		"${wiki_name:?}" \
@@ -485,6 +485,8 @@ function install_module_mediawiki_local_configuration() {(
 		s'\".*\"'\"$(printf %q "${product_admin_mail_address:?}")\"'  if m{\\\$wgEmergencyContact\\s*=};
 
 		s'\".*\"'\"$(printf %q "${product_admin_mail_address:?}")\"'  if m{\\\$wgPasswordSender\\s*=};
+
+		s'\".*\"'\"$(printf %q "${wiki_script_path:?}")\"'            if m{\\\$wgScriptPath\\s*=};
 
 	" LocalSettings.php
 
