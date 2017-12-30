@@ -123,6 +123,8 @@ function install_technology_stack_tomcat_configuration() {
 		msys|windows)
 			perl -i~ -pe '
 
+				chomp; s{\s*$}{\r\n}; # trim trailing space and ensure proper line terminator
+
 				s{^\s*((?:set\s+)?JAVA_OPTS\s*=.*)(--JvmMs\s+\d+)}{${1}--JvmMs '"${tomcat_service_jvm_heap_min:?}"'};
 
 				s{^\s*((?:set\s+)?JAVA_OPTS\s*=.*)(--JvmMx\s+\d+)}{${1}--JvmMx '"${tomcat_service_jvm_heap_max:?}"'};
@@ -135,6 +137,8 @@ function install_technology_stack_tomcat_configuration() {
 		case "$(inferred_os_type)" in
 		*)
 			perl -i~ -pe '
+
+				chomp; s{\s*$}{\n}; # trim trailing space and ensure proper line terminator
 
 				s{^\s*((?:export\s+)?JAVA_OPTS\s*=.*)(-Xms\d+[mM])}{${1}-Xms'"${tomcat_service_jvm_heap_min:?}"'M};
 
@@ -344,18 +348,18 @@ function install_module_fuseki_tomcat_configuration() {
 		msys|windows)
 			perl -i~ -pe '
 
-				s{[ \t]*$}{}; # trim trailing space
+				chomp; s{\s*$}{\r\n}; # trim trailing space and ensure proper line terminator
 
 				if (m#^\s*(?:set\s+)FUSEKI_BASE\s*=#) {
 
-					$_ = "" . "set FUSEKI_BASE='"${d1}"'$/";
+					$_ = "" . "set FUSEKI_BASE='"${d1}"'\r\n";
 
 					$found_FUSEKI_BASE = 1;
 				}
 
 				if (eof && ! defined($found_FUSEKI_BASE)) {
 
-					$_ = $_ . "set FUSEKI_BASE='"${d1}"'$/";
+					$_ = $_ . "set FUSEKI_BASE='"${d1}"'\r\n";
 
 					$found_FUSEKI_BASE = 1;
 				}
@@ -367,7 +371,7 @@ function install_module_fuseki_tomcat_configuration() {
 		*)
 			perl -i~ -pe '
 
-				s{[ \t]*$}{}; # trim trailing space
+				chomp; s{\s*$}{\n}; # trim trailing space and ensure proper line terminator
 
 				if (m#^\s*(?:export\s+)FUSEKI_BASE\s*=#) {
 
