@@ -118,6 +118,7 @@ function install_technology_stack_tomcat_configuration() {
 
 	for f1 in "$(inferred_tomcat_service_setenv_script_fpn)" ; do
 
+		! [ -e "$f1" ] ||
 		case "$(inferred_os_type)" in
 		msys|windows)
 			perl -i~ -pe '
@@ -130,6 +131,7 @@ function install_technology_stack_tomcat_configuration() {
 			;;
 		esac
 
+		! [ -e "${f1%.*}.sh" ] ||
 		case "$(inferred_os_type)" in
 		*)
 			perl -i~ -pe '
