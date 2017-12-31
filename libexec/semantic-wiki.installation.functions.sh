@@ -338,8 +338,6 @@ function install_module_fuseki_tomcat_configuration() {
 
 	local d1 f1
 
-	install_technology_stack_tomcat_configuration #! FIXME: HACK
-
 	for d1 in "${module_fuseki_installation_root_dpn:?}/etc" ; do
 	for f1 in "$(inferred_tomcat_service_setenv_script_fpn)" ; do
 
