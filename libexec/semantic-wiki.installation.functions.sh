@@ -302,7 +302,13 @@ function install_module_fuseki() {
 
 	install_module_fuseki_base
 
+	stop_technology_stack
+	#^-- prevents tomcat from auto-loading fuseki webapp
+
 	install_module_fuseki_configuration
+	#^-- prepares tomcat to (correctly) load fuseki webapp
+
+	start_technology_stack # fuseki webapp will be loaded
 }
 
 function install_module_fuseki_base() {
@@ -601,7 +607,7 @@ function capture_git_submodule_updates() {
 	if [ -e ".gitmodules" ] ; then
 
 		xx git submodule update --init --recursive
-			
+
 		xx git add -A :/
 		xx git commit -m "Capture submodule updates (if any)." --allow-empty
 	fi
